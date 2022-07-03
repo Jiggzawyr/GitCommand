@@ -1,0 +1,275 @@
+======================================================================
+                                Git Commands			
+======================================================================
+
+- View all of your settings and where they are coming from:
+git config --list --show-origin
+
+- Set your user name and email address:
+git config --global user.name "John Doe"
+git config --global user.email johndoe@example.com
+
+- Set main as the default branch name:
+git config --global init.defaultBranch main
+
+- Check your configuration settings:
+git config --list
+
+- Check specific key’s value:
+git config <key>
+git config user.name
+
+- Get help for command:
+git help <verb>
+git <verb> --help
+man git-<verb>
+git help config
+git add -h
+
+- Initializing a repository:
+git init
+
+- Clone a repository:
+git clone <url>
+git clone https://github.com/libgit2/libgit2
+git clone https://github.com/libgit2/libgit2 mylibgit
+git clone /srv/git/project.git
+git clone file:///srv/git/project.git
+git clone ssh://[user@]server/project.git
+git clone [user@]server:project.git
+
+- Check the status of your files:
+git status
+git status -s
+git status --short
+
+- Track new files:
+git add <files>
+git add README
+git add CONTRIBUTING.md
+git add .
+
+* Example of .gitignore file:
+------------------------------------------------------------------------------
+
+# ignore all .a files
+*.a
+
+# but do track lib.a, even though you're ignoring .a files above
+!lib.a
+
+# only ignore the TODO file in the current directory, not subdir/TODO
+/TODO
+
+# ignore all files in any directory named build
+build/
+
+# ignore doc/notes.txt, but not doc/server/arch.txt
+doc/*.txt
+
+# ignore all .pdf files in the doc/ directory and any of its subdirectories
+doc/**/*.pdf
+
+------------------------------------------------------------------------------
+
+- See what you’ve changed but not yet staged:
+git diff
+
+- See what you’ve staged that will go into your next commit:
+git diff --staged
+git diff --cached
+
+- Commit your changes:
+git commit
+git commit -m "Story 182: fix benchmarks for speed"
+git commit -a -m 'Add new benchmarks'
+
+
+- Remove a file (from your staging area, from your working directory):
+rm PROJECTS.md
+
+- Rename a file:
+git mv file_from file_to
+git mv README.md README
+
+- Lists the commits made in your repository:
+git log
+git log --patch -2
+git log -p -2
+git log --stat
+git log --pretty=oneline
+git log --oneline --decorate
+git log --oneline --decorate --graph --all
+git log --pretty=format:"%h - %an, %ar : %s"
+git log --pretty=format
+git log --pretty=format:"%h %s" --graph
+git log --since=2.weeks
+git log -S function_name
+git log -- path/to/file
+git log --pretty="%h - %s" --author='Junio C Hamano' --since="2008-10-01" --before="2008-11-01" --no-merges -- t
+
+   
+- Redo last commit with new staged files: 
+git commit --amend
+git commit --amend --no-edit   
+
+- Unstaging a staged file:
+git reset HEAD <file>
+git reset HEAD CONTRIBUTING.md
+git restore --staged <file>
+git restore --staged CONTRIBUTING.md
+
+- Unmodifying a modified file:
+git checkout -- <file>
+git checkout -- CONTRIBUTING.md
+git restore <file>
+git restore CONTRIBUTING.md
+   
+- Clone repository:    
+git clone https://github.com/schacon/ticgit 
+git clone https://github.com/schacon/simplegit-progit
+ 
+- Show remote servers:
+git remote
+git remote -v
+   
+- Add remote repositories:
+git remote add <shortname> <url>
+git remote add pb https://github.com/paulboone/ticgit
+
+- Fetch data from remote repositories:
+git fetch <remote>
+git fetch pb
+
+- Push data to remotes repositories:
+git push <remote> <branch>
+git push origin master
+
+- Show informations about remote repositories:
+git remote show <remote>
+git remote show origin
+
+- Rename a remote repository:
+git remote rename pb paul
+
+- Remove a remote repository:
+git remote remove paul
+
+- List tags:
+git tag
+git tag -l "v1.8.5*"
+
+- Create annotated tag:
+git tag -a v1.4 -m "my version 1.4"
+
+- See tag data:
+git show v1.4
+
+- Create lightweight tag:
+git tag v1.4-lw
+
+- Tag specific commit:
+git tag -a v1.2 9fceb02
+
+- Share tag:
+git push origin <tagname>
+git push origin v1.5
+git push origin --tags
+
+- Delete a tag:
+git tag -d v1.4-lw
+
+- Delete tag from remote server:
+git push <remote> :refs/tags/<tagname>
+git push origin :refs/tags/v1.4-lw
+git push origin --delete <tagname>
+
+- Checkout tag:
+git checkout v2.0.0
+
+- Configure aliases:
+git config --global alias.co checkout
+git config --global alias.br branch
+git config --global alias.ci commit
+git config --global alias.st status
+git config --global alias.unstage 'reset HEAD --'
+git config --global alias.last 'log -1 HEAD'
+
+- Create new branch:
+git branch testing
+
+- Switch to existing branch:
+git checkout testing
+
+- Create and switch to new branch:
+git checkout -b iss53
+git checkout -b hotfix
+
+- Merge branch into current branch: 
+git merge hotfix
+
+- Delete branch:
+git branch -d iss53
+
+- List git branches:
+git branch
+git branch -v
+git branch --merged
+git branch --no-merged
+git branch --all
+
+- Rename local branch:
+git branch --move bad-branch-name corrected-branch-name
+
+- Push local branch to remote:
+git push --set-upstream origin corrected-branch-name
+git push -u origin corrected-branch-name
+git push <remote> <branch>
+git push origin serverfix
+
+- Delete remote branch:
+git push origin --delete serverfix
+git push origin --delete bad-branch-name
+
+* Change remote branch name:
+------------------------------------------------------------------------------
+
+git branch --move master main
+git push --set-upstream origin main
+git branch --all
+git push origin --delete master
+
+------------------------------------------------------------------------------
+
+- Create and switch to new branch based on remote branch:
+git checkout -b serverfix origin/serverfix
+git checkout --track origin/serverfix
+git checkout serverfix
+git checkout -b sf origin/serverfix
+
+- Change upstream branch you're tracking:
+git branch -u origin/serverfix
+
+- Pull pull
+
+- Pull data from remote repositories:
+git pull
+
+- See tracking branches:
+git branch -vv
+
+- Rebase branch:
+git rebase master
+git rebase --onto master server client
+git rebase master server
+
+
+
+
+
+
+
+
+
+
+
